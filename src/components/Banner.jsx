@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, CircularProgress, Grid, Stack, Typography } from '@mui/material';
+import { Box, CircularProgress, Grid, Stack, Typography, Card, CardMedia } from '@mui/material';
 import { Container } from '@mui/system';
 import tmdb from '../services/tmdb';
 
@@ -39,7 +39,6 @@ const Banner = () => {
     <>
       <Box
         sx={{
-          minHeight: '500px',
           position: 'relative',
           backgroundImage: `url(${baseUrlForMovie}/original${movie.backdrop_path})`,
           backgroundPosition: 'center',
@@ -57,17 +56,13 @@ const Banner = () => {
           },
         }}
       >
-        <Container
-          sx={{
-            paddingTop: 5,
-          }}
-        >
+        <Container sx={{ paddingTop: 5 }}>
           <Grid container spacing={4}>
             <Grid
               item
               xs={12}
               sm={6}
-              md={6}
+              md={8}
               sx={{
                 zIndex: '1000',
               }}
@@ -95,14 +90,14 @@ const Banner = () => {
                 </Stack>
 
                 <Box>
-                  <Typography fontStyle="italic" variant="body">
+                  <Typography fontStyle="verdana" variant="body">
                     "{movie.tagline}"
                   </Typography>
+                  <Typography variant="h5">Description</Typography>
                   <Typography variant="body">{movie.overview}</Typography>
                 </Box>
               </Stack>
             </Grid>
-
             <Grid
               item
               xs={12}
@@ -111,7 +106,15 @@ const Banner = () => {
               sx={{
                 zIndex: '1000',
               }}
-            ></Grid>
+            >
+              <Card
+                sx={{
+                  maxWidth: '300px',
+                }}
+              >
+                <CardMedia component="img" image={`${baseUrlForMovie}/w300${movie.poster_path}`} alt={movie.title} />
+              </Card>
+            </Grid>
           </Grid>
         </Container>
       </Box>
